@@ -6,6 +6,8 @@ namespace NoSleepWithRunningVM
     {
         static NotifyIcon notifyIcon;
         static bool lastStatusNoSleep;
+
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -24,8 +26,7 @@ namespace NoSleepWithRunningVM
             var noSleepService = new NoSleepService();
             noSleepService.PreventingSleep += NoSleepService_PreventingSleep;
             noSleepService.PreventSleep();
-
-
+                        
             Application.Run();
 
             // remove icon from system tray
@@ -42,7 +43,7 @@ namespace NoSleepWithRunningVM
                     notifyIcon.BalloonTipText = notifyIcon.Text;
                     notifyIcon.ShowBalloonTip(1000);
                 }
-                    
+
                 lastStatusNoSleep = true;
             }
             else
@@ -57,6 +58,7 @@ namespace NoSleepWithRunningVM
                 lastStatusNoSleep = false;
             }
         }
+
 
     }
 }

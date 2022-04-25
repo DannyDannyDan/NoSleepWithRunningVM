@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSleepWithRunningVM", "NoS
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupNoSleep", "SetupNoSleep\SetupNoSleep.vdproj", "{D949948A-7F8A-43BA-AE30-FD6C9FF6F7AE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuestKeyHooker", "GuestKeyHooker\GuestKeyHooker.csproj", "{3F037A7A-08D0-4A91-A2E6-3544A862A041}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1A1D65F-D8BB-4054-B1FB-C26AC744EAEA} = {D1A1D65F-D8BB-4054-B1FB-C26AC744EAEA}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreeter", "GrpcGreeter\GrpcGreeter.csproj", "{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +36,22 @@ Global
 		{D949948A-7F8A-43BA-AE30-FD6C9FF6F7AE}.Release|Any CPU.ActiveCfg = Release
 		{D949948A-7F8A-43BA-AE30-FD6C9FF6F7AE}.Release|x64.ActiveCfg = Release
 		{D949948A-7F8A-43BA-AE30-FD6C9FF6F7AE}.Release|x64.Build.0 = Release
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Debug|x64.Build.0 = Debug|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Release|x64.ActiveCfg = Release|Any CPU
+		{3F037A7A-08D0-4A91-A2E6-3544A862A041}.Release|x64.Build.0 = Release|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Debug|x64.Build.0 = Debug|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Release|x64.ActiveCfg = Release|Any CPU
+		{DCC6BF84-C292-4CA6-9D19-BA54BD6E316F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
