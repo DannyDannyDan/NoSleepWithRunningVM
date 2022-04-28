@@ -2,13 +2,16 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
-using GrpcGreeter;
+using NoSleepWithRunningVM;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 //using GuestKeyHooker;
 
 namespace GuestKeyHooker
 {
     internal static class Program
     {
+        static NotifyIcon? notifyIcon;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -20,34 +23,50 @@ namespace GuestKeyHooker
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            notifyIcon = new NotifyIcon();
+            notifyIcon.ContextMenuStrip = Helpers.SystemTrayHelper.GetContextMenu();
+            notifyIcon.Icon = Properties.Resources.Keyboard_light;
+            notifyIcon.Visible = true;
+
             // setup keyboard hook
             var kh = new KeyboardHook(true);
             kh.KeyDown += Kh_KeyDown;
 
             //await ConnectGreater();
 
-            Application.Run(new Form1());
+            Application.Run();
         }
 
         private static async void Kh_KeyDown(Keys key, bool Shift, bool Ctrl, bool Alt)
         {
             Debug.WriteLine($"KeyDown {key} ({(int)key})", "KeyHooker");
+            try
+            {
+                if (key < Keys.VolumeMute || key > Keys.MediaPlayPause)
+                    return;
 
-            using var channel = GrpcChannel.ForAddress("https://localhost:7184");
-            var client = new GrpcGreeter.HookedKey.HookedKeyClient(channel);
-            var reply = await client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
-            Debug.WriteLine($"Greeting: {reply}");
-            Debug.WriteLine("Press any key to exit...");
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                //handler.ServerCertificateCustomValidationCallback += (o, c, ch, er) => true;
+                var httpClient = new HttpClient(handler);
+
+                var channel = GrpcChannel.ForAddress("https://Ryzen1:50443/", new GrpcChannelOptions
+                {
+                    HttpClient = httpClient
+                });
+
+                GuestKeyHooker.Helpers.KeyHelper.RelaseVmwareControl();
+                var client = new HookedKey.HookedKeyClient(channel);
+                var reply = await client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
+
+
+
+            }
+            catch (Exception ex)
+            {
+                //Debug.Print($"{ex.Message}: {ex.StackTrace}");
+                Debug.Print($"{ex.Message}.");
+            }
         }
-
-        private static async Task ConnectGreater()
-        {
-            using var channel = GrpcChannel.ForAddress("https://localhost:7184");
-            var client = new Greeter.GreeterClient(channel);
-            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GuestKeyHooker" });
-            Debug.WriteLine("Greeting: " + reply.Message);
-            Debug.WriteLine("Press any key to exit...");
-        }
-
     }
 }
