@@ -45,19 +45,22 @@ namespace NoSleepWithRunningVM.Forms
             {
                 var oldCursorPosition = Cursor.Position;
                 //MoveMouse(new Point(0, 0));
-                RelaseVmwareControl();
+                //RelaseVmwareControl();
                 //Cursor.Position = new Point(0,0);
+                MoveCursor(new Point(0, 0));
+                MoveCursor(new Point(1, 1));
+                MoveCursor(new Point(2, 2));
                 //Application.DoEvents();
                 System.Threading.Thread.Sleep(300);
                 this.Show();
-                RelaseVmwareControl();
+                //RelaseVmwareControl();
 
                 this.Focus();
-                RelaseVmwareControl();
+                //RelaseVmwareControl();
 
                 System.Threading.Thread.Sleep(300);
                 this.TopMost = true;
-                RelaseVmwareControl();
+                //RelaseVmwareControl();
 
                 System.Threading.Thread.Sleep(300);
                 SetForegroundWindow(this.Handle);
@@ -65,7 +68,8 @@ namespace NoSleepWithRunningVM.Forms
                 //Task.Run(() => keybd_event((byte)keyCode, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero));
                 //keybd_event((byte)keyCode, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
                 keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
-                //SendKeys.Send(keyCode.ToString());
+                keybd_event((byte)Keys.VolumeMute, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+                SendKeys.Send(keyCode.ToString());
                 System.Threading.Thread.Sleep(500);
                 //Cursor.Position = oldCursorPosition;
                 this.Close();
@@ -87,7 +91,16 @@ namespace NoSleepWithRunningVM.Forms
                 this.Close();
             }
         }
+        private void MoveCursor(Point point)
+        {
+            // Set the Current cursor, move the cursor's Position,
+            // and set its clipping rectangle to the form. 
 
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Cursor.Position = point;
+            //Cursor.Clip = new Rectangle(this.Location, this.Size);
+            Cursor.Clip = Screen.PrimaryScreen.Bounds;
+        }
         private void RelaseVmwareControl()
         {
             // Simulating a Ctrl+Alt keystrokes

@@ -10,7 +10,7 @@ namespace GuestKeyHooker.Helpers
     internal static class KeyHelper
     {
         public const int KEYEVENTF_EXTENTEDKEY = 1;
-        public const int KEYEVENTF_KEYUP = 0;
+        public const int KEYEVENTF_KEYUP = 2;
         public const int VK_MEDIA_NEXT_TRACK = 0xB0;
         public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
         public const int VK_MEDIA_PREV_TRACK = 0xB1;
