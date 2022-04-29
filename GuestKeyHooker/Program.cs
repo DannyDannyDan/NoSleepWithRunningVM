@@ -5,12 +5,16 @@ using Grpc.Net.Client;
 using NoSleepWithRunningVM;
 using System.Net;
 using System.Runtime.ConstrainedExecution;
-//using GuestKeyHooker;
+using System.Runtime.InteropServices;
 
 namespace GuestKeyHooker
 {
     internal static class Program
     {
+
+        [DllImport("user32", EntryPoint = "SendMessageA")]
+        public static extern int SendMessage(int hwnd, int wMsg, int wParam, ref int lParam);
+
         static NotifyIcon? notifyIcon;
 
         /// <summary>
@@ -44,6 +48,8 @@ namespace GuestKeyHooker
             {
                 if (key < Keys.VolumeMute || key > Keys.MediaPlayPause)
                     return;
+
+                //Helpers.MouseHelper.MoveMouse(new Point(0, 0));
 
                 var handler = new HttpClientHandler();
                 handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;

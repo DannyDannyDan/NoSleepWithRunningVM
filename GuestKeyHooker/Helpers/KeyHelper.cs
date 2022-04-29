@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GuestKeyHooker.Helpers
 {
+    
     internal static class KeyHelper
     {
         public const int KEYEVENTF_EXTENTEDKEY = 1;
@@ -22,8 +23,13 @@ namespace GuestKeyHooker.Helpers
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);
 
+        private static DateTime lastReleaseCall = DateTime.Now.AddMinutes(-1);
+
         public static void RelaseVmwareControl()
         {
+            if (lastReleaseCall.AddSeconds(2) > DateTime.Now)
+                return;
+            Thread.Sleep(300);
             // Simulating a Ctrl+Alt keystrokes
             keybd_event(VK_CONTROL, 0x9d, 0, IntPtr.Zero); //Alt Press
             keybd_event(VK_MENU, 0xb8, 0, IntPtr.Zero); // Tab Press
