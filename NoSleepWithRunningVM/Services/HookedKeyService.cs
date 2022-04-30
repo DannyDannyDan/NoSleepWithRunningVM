@@ -9,15 +9,6 @@ namespace NoSleepWithRunningVM.Services
 {
     public class HookedKeyService : HookedKey.HookedKeyBase
     {
-        //public const int KEYEVENTF_EXTENTEDKEY = 1;
-        //public const int KEYEVENTF_KEYUP = 0;
-        //public const int VK_MEDIA_NEXT_TRACK = 0xB0;
-        //public const int VK_MEDIA_PLAY_PAUSE = 0xB3;
-        //public const int VK_MEDIA_PREV_TRACK = 0xB1;
-
-        //[DllImport("user32.dll")]
-        //public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);
-
         private readonly ILogger<HookedKeyService> _logger;
         private Forms.DummySendKeysForm sendKeyForm = new Forms.DummySendKeysForm();
 
