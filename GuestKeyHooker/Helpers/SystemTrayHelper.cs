@@ -12,13 +12,22 @@ namespace GuestKeyHooker.Helpers
         internal static ContextMenuStrip GetContextMenu()
         {
             ContextMenuStrip contextMenu = new ContextMenuStrip();
+            contextMenu.Items.Add("&Settings", null, Settings_Click);
             contextMenu.Items.Add("&Exit", null, Exit_Click);
             return contextMenu;
         }
 
-        private static void Exit_Click(object sender, EventArgs e)
+        private static void Exit_Click(object? sender, EventArgs e)
         {
             Application.Exit();
         }
+        private static void Settings_Click(object? sender, EventArgs e)
+        {
+            using (var frm = new Forms.SettingsForm())
+            {
+                frm.ShowDialog();
+            }
+        }
+
     }
 }
