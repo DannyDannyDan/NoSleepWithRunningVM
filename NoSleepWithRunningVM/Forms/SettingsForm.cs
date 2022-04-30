@@ -37,5 +37,11 @@ namespace NoSleepWithRunningVM.Forms
             this.Close();
         }
 
+
+        private Forms.DummySendKeysForm sendKeyForm = new Forms.DummySendKeysForm();
+        private void btnTestSendKeys_Click(object sender, EventArgs e)
+        {
+            sendKeyForm.SendKey(Keys.VolumeMute);
+        }
     }
 }
