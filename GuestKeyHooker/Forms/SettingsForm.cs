@@ -15,6 +15,9 @@ namespace GuestKeyHooker.Forms
         public SettingsForm()
         {
             InitializeComponent();
+
+            txtServerIp.Text = Properties.Settings.Default.ServiceIp;
+            txtServerPort.Text = Properties.Settings.Default.ServicePort;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

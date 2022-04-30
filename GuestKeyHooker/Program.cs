@@ -23,7 +23,7 @@ namespace GuestKeyHooker
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-
+            
             notifyIcon = new NotifyIcon();
             notifyIcon.ContextMenuStrip = Helpers.SystemTrayHelper.GetContextMenu();
             notifyIcon.Icon = Properties.Resources.Keyboard_light;
