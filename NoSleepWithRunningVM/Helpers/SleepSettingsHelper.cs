@@ -45,7 +45,7 @@ namespace NoSleepWithRunningVM.Helpers
             {
                 sleepSettings = new Models.SleepSettingsModel()
                 {
-                    IfVmWareRunning = true,
+                    VmWareRunning = true,
                     VmWareGuestRunning = true
                 };
                 Properties.Settings.Default.SleepSettings = JsonConvert.SerializeObject(sleepSettings);
@@ -72,7 +72,7 @@ namespace NoSleepWithRunningVM.Helpers
                 var sleepSettings = Helpers.SleepSettingsHelper.LoadSettings();
                 if (sleepSettings == null)
                     return false;
-                if (sleepSettings.IfVmWareRunning == false)
+                if (sleepSettings.VmWareRunning == false)
                     return false;
                 if (sleepSettings.VmWareGuestRunning == true && IsVmWareGuestRunning() == false)
                     return false;

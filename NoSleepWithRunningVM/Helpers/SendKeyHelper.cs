@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 
 namespace NoSleepWithRunningVM.Helpers
 {
-    internal class SendKeyHelper
+    internal static class SendKeyHelper
     {
+
     }
 }
