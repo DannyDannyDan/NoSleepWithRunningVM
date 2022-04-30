@@ -11,5 +11,7 @@ namespace NoSleepWithRunningVM.Models
     {
         public bool VmWareRunning { get; set; }
         public bool VmWareGuestRunning { get; set; }
+        public bool GrpcServerEnabled { get; set; }
+        public string GrpcServerPort { get; set; } = "";
     }
 }

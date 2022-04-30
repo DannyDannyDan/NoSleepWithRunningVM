@@ -20,6 +20,9 @@ namespace NoSleepWithRunningVM.Forms
             var sleepSettings = JsonConvert.DeserializeObject<Models.SleepSettingsModel>(Properties.Settings.Default.SleepSettings);
             chkVmWareIsRunning.Checked = sleepSettings.VmWareRunning;
             chkGuestVmIsRunning.Checked = sleepSettings.VmWareGuestRunning;
+            chkEnableGrpcServer.Checked = sleepSettings.GrpcServerEnabled;
+            txtServerPort.Text = sleepSettings.GrpcServerPort;
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -32,7 +35,9 @@ namespace NoSleepWithRunningVM.Forms
             Helpers.SleepSettingsHelper.SaveSettings(new Models.SleepSettingsModel()
             {
                 VmWareRunning = chkVmWareIsRunning.Checked,
-                VmWareGuestRunning = chkGuestVmIsRunning.Checked
+                VmWareGuestRunning = chkGuestVmIsRunning.Checked,
+                GrpcServerEnabled = chkEnableGrpcServer.Checked,
+                GrpcServerPort = txtServerPort.Text
             });
             this.Close();
         }
@@ -44,6 +49,15 @@ namespace NoSleepWithRunningVM.Forms
                 chkGuestVmIsRunning.Checked = false;
             }
             chkGuestVmIsRunning.Enabled = chkVmWareIsRunning.Checked;
+        }
+
+        private void chkEnableGrpcServer_CheckedChanged(object sender, EventArgs e)
+        {
+            txtServerPort.Enabled = chkEnableGrpcServer.Checked;
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }
