@@ -36,9 +36,10 @@ namespace NoSleepWithRunningVM
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            var sleepSettings = Helpers.SleepSettingsHelper.LoadSettings();
             app.MapGrpcService<HookedKeyService>();
             app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-            var url = $"https://0.0.0.0:50443";
+            var url = $"https://0.0.0.0:{sleepSettings.GrpcServerPort}";
             app.RunAsync(url);
 
             Application.Run();
@@ -48,7 +49,7 @@ namespace NoSleepWithRunningVM
         }
         private static void NoSleepService_PreventingSleep(object? sender, bool e)
         {
-            if (notifyIcon==null) 
+            if (notifyIcon == null)
                 return;
 
             if (e)
@@ -66,7 +67,7 @@ namespace NoSleepWithRunningVM
             else
             {
                 notifyIcon.Icon = Properties.Resources.Sleep;
-                notifyIcon.Text = "No Virtual Machines running.  Sleep mode enabled.";
+                notifyIcon.Text = "No Virtual Machine running.  Sleep mode enabled.";
                 if (lastStatusNoSleep == true)
                 {
                     notifyIcon.BalloonTipText = notifyIcon.Text;
