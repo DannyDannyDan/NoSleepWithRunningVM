@@ -9,8 +9,6 @@ namespace GuestKeyHooker.Services
 {
     internal static class GrpcClientService
     {
-        //private static readonly string _url= "https://Ryzen1:50443/";
-
         private static HookedKey.HookedKeyClient? _client;
         public static string ServerIp { get; set; } = Properties.Settings.Default.ServiceIp;
         public static string ServerPort { get; set; } = Properties.Settings.Default.ServicePort;
@@ -35,7 +33,6 @@ namespace GuestKeyHooker.Services
                 if (_client == null)
                 {
                     var handler = new HttpClientHandler();
-                    //if (Properties.Settings.Default.RequireValidSsl == false)
                     
                     handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 

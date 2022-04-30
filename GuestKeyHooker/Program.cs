@@ -14,7 +14,6 @@ namespace GuestKeyHooker
     internal static class Program
     {
         static NotifyIcon? notifyIcon;
-        //private static HookedKey.HookedKeyClient GrpcClient = GrpcClientService.Client;
         private static bool IsConnected;
         private static Forms.SettingsForm? _settingsForm = null;
         /// <summary>
