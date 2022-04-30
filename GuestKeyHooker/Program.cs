@@ -22,15 +22,18 @@ namespace GuestKeyHooker
         [STAThread]
         static void Main()
         {
-            ApplicationConfiguration.Initialize();
-
             // exit if already running for this user
             if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName)
                 .Where((p) => p.SessionId == Process.GetCurrentProcess().SessionId)
                 .Count() > 1)
             {
+                MessageBox.Show("Already Running", "Guest Key Hooker", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+                return; // this is hit
             }
+
+            ApplicationConfiguration.Initialize();
+
 
             notifyIcon = new NotifyIcon();
             notifyIcon.ContextMenuStrip = Helpers.SystemTrayHelper.GetContextMenu();
