@@ -6,22 +6,40 @@ using NoSleepWithRunningVM;
 using System.Net;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Net.Sockets;
 
 namespace GuestKeyHooker
 {
     internal static class Program
     {
-
-        [DllImport("user32", EntryPoint = "SendMessageA")]
-        public static extern int SendMessage(int hwnd, int wMsg, int wParam, ref int lParam);
-
         static NotifyIcon? notifyIcon;
+        private static HookedKey.HookedKeyClient? _client;
+
+        private static HookedKey.HookedKeyClient Client { 
+            get { 
+                if (_client == null)
+                {
+                    var handler = new HttpClientHandler();
+                    handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                    var httpClient = new HttpClient(handler);
+
+                    //var channel = GrpcChannel.ForAddress("https://Ryzen1:50443/", new GrpcChannelOptions
+                    var channel = GrpcChannel.ForAddress("https://Ryzen1:50443/", new GrpcChannelOptions
+                    {
+                        HttpClient = httpClient
+                    });
+
+                    _client = new HookedKey.HookedKeyClient(channel);
+                }
+                return _client;
+            }             
+        }
 
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static async Task Main()
+        static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
@@ -36,41 +54,25 @@ namespace GuestKeyHooker
             var kh = new KeyboardHook(true);
             kh.KeyDown += Kh_KeyDown;
 
-            //await ConnectGreater();
+            // connect client on startup
+            _ = Client.SendHookedKeyAsync(new HookedKeySendModel());
 
             Application.Run();
         }
 
         private static async void Kh_KeyDown(Keys key, bool Shift, bool Ctrl, bool Alt)
         {
-            Debug.WriteLine($"KeyDown {key} ({(int)key})", "KeyHooker");
             try
             {
                 if (key < Keys.VolumeMute || key > Keys.MediaPlayPause)
                     return;
 
-                //Helpers.MouseHelper.MoveMouse(new Point(0, 0));
+                Debug.WriteLine($"SendHookedKeyAsync {key} ({(int)key})", "KeyHooker");
 
-                var handler = new HttpClientHandler();
-                handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                //handler.ServerCertificateCustomValidationCallback += (o, c, ch, er) => true;
-                var httpClient = new HttpClient(handler);
-
-                var channel = GrpcChannel.ForAddress("https://Ryzen1:50443/", new GrpcChannelOptions
-                {
-                    HttpClient = httpClient
-                });
-
-                GuestKeyHooker.Helpers.KeyHelper.RelaseVmwareControl();
-                var client = new HookedKey.HookedKeyClient(channel);
-                var reply = await client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
-
-
-
+                var reply = await Client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
             }
             catch (Exception ex)
             {
-                //Debug.Print($"{ex.Message}: {ex.StackTrace}");
                 Debug.Print($"{ex.Message}.");
             }
         }
