@@ -26,43 +26,18 @@ namespace NoSleepWithRunningVM.Services
             _logger = logger;
         }
 
-        public override Task<HookedKeyResponseModel> SendHookedKey(HookedKeySendModel request, ServerCallContext context)
+        public override async Task<HookedKeyResponseModel> SendHookedKey(HookedKeySendModel request, ServerCallContext context)
         {
             if (request.KeyCode < (int)Keys.VolumeMute || request.KeyCode > (int)Keys.MediaPlayPause)
-                return Task.FromResult(new HookedKeyResponseModel() { IsReceived = true });
+                return await Task.FromResult(new HookedKeyResponseModel() { IsReceived = true });
 
             Console.WriteLine($"SendKey Requested: {request.KeyCode}");
             Debug.WriteLine($"SendKey Requested: {request.KeyCode}");
                        
+            Task.Run(() => sendKeyForm.SendKey((Keys)request.KeyCode));
 
-            //Forms.DummySendKeysForm sendKeyForm = null;
-            //if (sendKeyForm == null)
-            //{
-            //    sendKeyForm = new Forms.DummySendKeysForm();
-            //}
-            //if (!sendKeyForm.Visible)
-            //    sendKeyForm.Show();
-
-            //sendKeyForm.Show();
-            sendKeyForm.SendKey((Keys)request.KeyCode);
-            //SendKeysFunction((Keys)request.KeyCode);
-            
-            
-            //keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);    // Play/Pause
-            
-            
-            //keybd_event((byte)request.KeyCode, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
-
-
-            return Task.FromResult(new HookedKeyResponseModel() { IsReceived = true });
+            return await Task.FromResult(new HookedKeyResponseModel() { IsReceived = true });
         }
 
-        //public const byte VK_F8 = 0x77;
-
-        //public void SendKeysFunction(Keys key)
-        //{
-        //    //keybd_event((byte)key, 0x45, 0, 0);
-        //    keybd_event((byte)key, 0x0, 0, 0);
-        //}
     }
 }

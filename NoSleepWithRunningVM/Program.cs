@@ -44,7 +44,7 @@ namespace NoSleepWithRunningVM
             app.MapGrpcService<HookedKeyService>();
             app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
             var url = $"https://0.0.0.0:50443";
-            app.Run(url);
+            app.RunAsync(url);
 
             Application.Run();
 

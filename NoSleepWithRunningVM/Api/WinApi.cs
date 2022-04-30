@@ -8,9 +8,6 @@ namespace NoSleepWithRunningVM.Api
 {
     public static class WinApi
     {
-        [DllImport("kernel32")]
-        internal static extern void Sleep(int dwMilliseconds);
-
         public const short SW_SHOWMINIMIZED = 2;
         public const short SW_SHOWNORMAL = 1;
 
@@ -20,10 +17,34 @@ namespace NoSleepWithRunningVM.Api
             public int y;
         }
 
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetShellWindow();
+
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, String lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        public const uint WM_KEYDOWN = 0x0100;
+        public const uint WM_KEYUP = 0x0101;
+        public const uint WM_KILLFOCUS = 0x0008;
+
+        public const int WM_APPCOMMAND = 0x319;
+        public const int APPCOMMAND_VOLUME_MUTE = 0x80000;
+        public const int APPCOMMAND_VOLUME_UP = 0xA0000;
+        public const int APPCOMMAND_VOLUME_DOWN = 0x90000;
+        public const int APPCOMMAND_MEDIA_NEXTTRACK = 11<<16;
+        public const int APPCOMMAND_MEDIA_PREVIOUSTRACK = 12<<16;
+        public const int APPCOMMAND_MEDIA_STOP = 13<<16;
+        public const int APPCOMMAND_MEDIA_PLAY_PAUSE = 14<<16;
+
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
         public static extern bool IsWindow(IntPtr hWnd);
-        [DllImport("user32", EntryPoint = "FindWindowA")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
 
         // UPGRADE_WARNING: Structure WINDOWPLACEMENT may require marshalling attributes to be passed as an argument in this Declare statement. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="C429C3A5-5D47-4CD9-8F51-74A1616405DC"'
         [DllImport("user32")]
@@ -43,8 +64,6 @@ namespace NoSleepWithRunningVM.Api
         private const short HWND_TOPMOST = -1;
         private const short HWND_NOTOPMOST = -2;
 
-        [DllImport("user32", EntryPoint = "SendMessageA")]
-        public static extern int SendMessage(int hwnd, int wMsg, int wParam, ref int lParam);
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, [MarshalAs(UnmanagedType.I4)] ShowWindowCommands nCmdShow);
 
