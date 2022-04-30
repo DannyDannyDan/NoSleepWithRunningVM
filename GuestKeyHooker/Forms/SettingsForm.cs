@@ -16,5 +16,32 @@ namespace GuestKeyHooker.Forms
         {
             InitializeComponent();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private async void btnOk_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+
+            //var gRpcClient = new Services.GrpcClientService(Properties.Settings.Default.ServiceIp);
+            bool isConnected = await Services.GrpcClientService.CanConnectAsync(txtServerIp.Text, txtServerPort.Text);
+
+            if (!isConnected)
+            {
+                var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Properties.Settings.Default.ServiceIp = txtServerIp.Text;
+                Properties.Settings.Default.ServicePort = txtServerPort.Text;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Reload();
+
+                this.Close();
+            }
+        }
     }
 }

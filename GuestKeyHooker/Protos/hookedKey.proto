@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "NoSleepWithRunningVM";
+option csharp_namespace = "GuestKeyHooker";
 
 service HookedKey{
 	rpc SendHookedKey (HookedKeySendModel) returns (HookedKeyResponseModel);
