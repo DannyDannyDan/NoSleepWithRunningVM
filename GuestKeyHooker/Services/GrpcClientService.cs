@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,11 +33,12 @@ namespace GuestKeyHooker.Services
             {
                 if (_client == null)
                 {
+                    HttpClient.DefaultProxy = new WebProxy();
                     var handler = new HttpClientHandler();
                     
                     handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-                    var httpClient = new HttpClient(handler);                    
+                    var httpClient = new HttpClient(handler);
                     var channel = GrpcChannel.ForAddress(Url, new GrpcChannelOptions
                     {
                         HttpClient = httpClient
