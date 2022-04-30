@@ -33,13 +33,11 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.chkGuestVmIsRunning = new System.Windows.Forms.CheckBox();
             this.chkVmWareIsRunning = new System.Windows.Forms.CheckBox();
-            this.btnTestSendKeys = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnTestSendKeys);
             this.groupBox1.Controls.Add(this.OkButton);
             this.groupBox1.Controls.Add(this.CancelButton);
             this.groupBox1.Controls.Add(this.chkGuestVmIsRunning);
@@ -47,7 +45,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(349, 235);
+            this.groupBox1.Size = new System.Drawing.Size(349, 151);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prevent Sleep When:";
@@ -55,7 +53,7 @@
             // OkButton
             // 
             this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OkButton.Location = new System.Drawing.Point(183, 193);
+            this.OkButton.Location = new System.Drawing.Point(183, 109);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(77, 30);
             this.OkButton.TabIndex = 2;
@@ -66,7 +64,7 @@
             // CancelButton
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(266, 193);
+            this.CancelButton.Location = new System.Drawing.Point(266, 109);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(77, 30);
             this.CancelButton.TabIndex = 2;
@@ -93,25 +91,17 @@
             this.chkVmWareIsRunning.TabIndex = 0;
             this.chkVmWareIsRunning.Text = "VMWare Workstation is running";
             this.chkVmWareIsRunning.UseVisualStyleBackColor = true;
-            // 
-            // btnTestSendKeys
-            // 
-            this.btnTestSendKeys.Location = new System.Drawing.Point(12, 125);
-            this.btnTestSendKeys.Name = "btnTestSendKeys";
-            this.btnTestSendKeys.Size = new System.Drawing.Size(92, 34);
-            this.btnTestSendKeys.TabIndex = 1;
-            this.btnTestSendKeys.Text = "Send Keys";
-            this.btnTestSendKeys.UseVisualStyleBackColor = true;
-            this.btnTestSendKeys.Click += new System.EventHandler(this.btnTestSendKeys_Click);
+            this.chkVmWareIsRunning.CheckedChanged += new System.EventHandler(this.chkVmWareIsRunning_CheckedChanged);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 235);
+            this.ClientSize = new System.Drawing.Size(349, 151);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(365, 190);
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "No-Sleep Settings";
@@ -128,6 +118,5 @@
         private CheckBox chkVmWareIsRunning;
         private Button OkButton;
         private Button CancelButton;
-        private Button btnTestSendKeys;
     }
 }

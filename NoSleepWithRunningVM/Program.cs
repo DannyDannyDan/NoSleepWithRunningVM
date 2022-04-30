@@ -11,15 +11,12 @@ namespace NoSleepWithRunningVM
         static NotifyIcon? notifyIcon;
         static bool lastStatusNoSleep;
 
-
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
             notifyIcon = new NotifyIcon();
@@ -31,9 +28,7 @@ namespace NoSleepWithRunningVM
             noSleepService.PreventingSleep += NoSleepService_PreventingSleep;
             noSleepService.PreventSleep();
 
-
             var builder = WebApplication.CreateBuilder(args);
-            //builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(50443));
 
             // Add services to the container.
             builder.Services.AddGrpc();
@@ -53,6 +48,9 @@ namespace NoSleepWithRunningVM
         }
         private static void NoSleepService_PreventingSleep(object? sender, bool e)
         {
+            if (notifyIcon==null) 
+                return;
+
             if (e)
             {
                 notifyIcon.Icon = Properties.Resources.NoSleep;

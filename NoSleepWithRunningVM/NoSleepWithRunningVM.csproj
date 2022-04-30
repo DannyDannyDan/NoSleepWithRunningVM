@@ -11,6 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Forms\DummySendKeysForm.cs" />
+    <Compile Remove="Forms\DummySendKeysForm.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Forms\DummySendKeysForm.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="Protos\hookedKey.proto" />

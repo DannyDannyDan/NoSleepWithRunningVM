@@ -9,7 +9,7 @@ namespace NoSleepWithRunningVM.Models
 {
     internal class SleepSettingsModel
     {
-        public bool IfVmWareRunning { get; set; }
+        public bool VmWareRunning { get; set; }
         public bool VmWareGuestRunning { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace NoSleepWithRunningVM.Forms
             InitializeComponent();
 
             var sleepSettings = JsonConvert.DeserializeObject<Models.SleepSettingsModel>(Properties.Settings.Default.SleepSettings);
-            chkVmWareIsRunning.Checked = sleepSettings.IfVmWareRunning;
+            chkVmWareIsRunning.Checked = sleepSettings.VmWareRunning;
             chkGuestVmIsRunning.Checked = sleepSettings.VmWareGuestRunning;
         }
 
@@ -31,17 +31,19 @@ namespace NoSleepWithRunningVM.Forms
         {
             Helpers.SleepSettingsHelper.SaveSettings(new Models.SleepSettingsModel()
             {
-                IfVmWareRunning = chkVmWareIsRunning.Checked,
+                VmWareRunning = chkVmWareIsRunning.Checked,
                 VmWareGuestRunning = chkGuestVmIsRunning.Checked
             });
             this.Close();
         }
 
-
-        private Forms.DummySendKeysForm sendKeyForm = new Forms.DummySendKeysForm();
-        private void btnTestSendKeys_Click(object sender, EventArgs e)
+        private void chkVmWareIsRunning_CheckedChanged(object sender, EventArgs e)
         {
-            sendKeyForm.SendKey(Keys.VolumeMute);
+            if (chkVmWareIsRunning.Checked == false)
+            {
+                chkGuestVmIsRunning.Checked = false;
+            }
+            chkGuestVmIsRunning.Enabled = chkVmWareIsRunning.Checked;
         }
     }
 }

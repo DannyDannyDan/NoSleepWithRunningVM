@@ -11,8 +11,8 @@ namespace NoSleepWithRunningVM
     internal class NoSleepService
     {
         System.Timers.Timer _stayAwakeTimer;
-        private readonly SleepSettingsModel _sleepSettings;
-        public event EventHandler<bool> PreventingSleep;
+        private readonly SleepSettingsModel? _sleepSettings;
+        public event EventHandler<bool>? PreventingSleep;
         public NoSleepService()
         {
             _stayAwakeTimer = new System.Timers.Timer(6 * 1000);
@@ -20,7 +20,7 @@ namespace NoSleepWithRunningVM
         }
 
 
-        private void _stayAwakeTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void _stayAwakeTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             UpdateSleepMode();
         }
