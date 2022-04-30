@@ -23,7 +23,15 @@ namespace GuestKeyHooker
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            
+
+            // exit if already running for this user
+            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName)
+                .Where((p) => p.SessionId == Process.GetCurrentProcess().SessionId)
+                .Count() > 1)
+            {
+                Application.Exit();
+            }
+
             notifyIcon = new NotifyIcon();
             notifyIcon.ContextMenuStrip = Helpers.SystemTrayHelper.GetContextMenu();
             notifyIcon.Icon = Properties.Resources.Keyboard_light;
