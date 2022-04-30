@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
-//using NoSleepWithRunningVM;
 using System.Net;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -16,6 +15,7 @@ namespace GuestKeyHooker
         static NotifyIcon? notifyIcon;
         private static bool IsConnected;
         private static Forms.SettingsForm? _settingsForm = null;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
