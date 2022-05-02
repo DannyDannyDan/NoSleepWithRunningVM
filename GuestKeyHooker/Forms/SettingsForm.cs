@@ -41,19 +41,19 @@ namespace GuestKeyHooker.Forms
                 Program.SignalRClientService = new SignalRClientService($"http://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
                 bool isConnected = Program.SignalRClientService.IsConnected;
 
-                if (!isConnected)
-                {
-                    var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    GuestKeyHooker.Properties.Settings.Default.ServiceIp = txtServerIp.Text;
-                    GuestKeyHooker.Properties.Settings.Default.ServicePort = txtServerPort.Text;
-                    GuestKeyHooker.Properties.Settings.Default.Save();
-                    GuestKeyHooker.Properties.Settings.Default.Reload();
+                //if (!isConnected)
+                //{
+                //    var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
+                //else
+                //{
+                GuestKeyHooker.Properties.Settings.Default.ServiceIp = txtServerIp.Text;
+                GuestKeyHooker.Properties.Settings.Default.ServicePort = txtServerPort.Text;
+                GuestKeyHooker.Properties.Settings.Default.Save();
+                GuestKeyHooker.Properties.Settings.Default.Reload();
 
-                    this.Close();
-                }
+                this.Close();
+                //}
 
             }
             catch (Exception ex)
