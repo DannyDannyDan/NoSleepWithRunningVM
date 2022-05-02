@@ -12,6 +12,7 @@
   <ItemGroup>
     <Compile Remove="Helpers\KeyHelper.cs" />
     <Compile Remove="Helpers\MouseHelper.cs" />
+    <Compile Remove="Services\GrpcClientService.cs" />
   </ItemGroup>
 
   <ItemGroup>
