@@ -15,7 +15,7 @@ namespace GuestKeyHooker
         static NotifyIcon? notifyIcon;
         private static bool IsConnected;
         private static Forms.SettingsForm? _settingsForm = null;
-
+        public static Services.SignalRClientService? SignalRClientService = null;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -34,22 +34,23 @@ namespace GuestKeyHooker
 
             ApplicationConfiguration.Initialize();
 
-
             notifyIcon = new NotifyIcon();
             notifyIcon.ContextMenuStrip = Helpers.SystemTrayHelper.GetContextMenu();
             notifyIcon.Icon = Properties.Resources.Keyboard_light;
             notifyIcon.Visible = true;
 
+            
+
             // setup keyboard hook
             var kh = new KeyboardHook(true);
             kh.KeyDown += Kh_KeyDown;
 
-            ConnectGrpcServer();
+            ConnectHostServer();
 
             Application.Run();
         }
 
-        private static async void ConnectGrpcServer()
+        private static void ConnectHostServer()
         {
             if (Properties.Settings.Default.ServiceIp == "" || Properties.Settings.Default.ServicePort == "")
             {
@@ -62,7 +63,11 @@ namespace GuestKeyHooker
                     return;
             }
 
-            IsConnected = await GrpcClientService.CanConnectAsync();
+            SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+
+            IsConnected = SignalRClientService.IsConnected;
+
+            //IsConnected = await GrpcClientService.CanConnectAsync();
 
             if (IsConnected == false)
                 MessageBox.Show("Unable to connect");
@@ -74,7 +79,8 @@ namespace GuestKeyHooker
                 return;
 
             if (!IsConnected)
-                IsConnected = await GrpcClientService.CanConnectAsync();
+                //IsConnected = await GrpcClientService.CanConnectAsync();
+                IsConnected = SignalRClientService.IsConnected;
 
             if (IsConnected)
                 try
@@ -84,7 +90,9 @@ namespace GuestKeyHooker
 
                     Debug.WriteLine($"SendHookedKeyAsync {key} ({(int)key})", "KeyHooker");
 
-                    var reply = await GrpcClientService.Client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
+                    SignalRClientService.SendCommand("VM Guest", "asdf");
+
+                    //var reply = await GrpcClientService.Client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
                 }
                 catch (Exception ex)
                 {

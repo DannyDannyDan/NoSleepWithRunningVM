@@ -37,7 +37,7 @@ namespace GuestKeyHooker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("50443")]
         public string ServicePort {
             get {
                 return ((string)(this["ServicePort"]));

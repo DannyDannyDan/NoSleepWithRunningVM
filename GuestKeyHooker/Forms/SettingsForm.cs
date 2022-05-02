@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GuestKeyHooker.Services;
 
 namespace GuestKeyHooker.Forms
 {
@@ -16,34 +17,47 @@ namespace GuestKeyHooker.Forms
         {
             InitializeComponent();
 
-            txtServerIp.Text = Properties.Settings.Default.ServiceIp;
-            txtServerPort.Text = Properties.Settings.Default.ServicePort;
+            txtServerIp.Text = GuestKeyHooker.Properties.Settings.Default.ServiceIp;
+            txtServerPort.Text = GuestKeyHooker.Properties.Settings.Default.ServicePort;
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private async void btnOk_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
 
-            //var gRpcClient = new Services.GrpcClientService(Properties.Settings.Default.ServiceIp);
-            bool isConnected = await Services.GrpcClientService.CanConnectAsync(txtServerIp.Text, txtServerPort.Text);
-
-            if (!isConnected)
+            try
             {
-                var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //var gRpcClient = new Services.GrpcClientService(Properties.Settings.Default.ServiceIp);
+                //bool isConnected = await Services.GrpcClientService.CanConnectAsync(txtServerIp.Text, txtServerPort.Text);
+
+                //Program.SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+                Program.SignalRClientService = new SignalRClientService($"https://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
+                bool isConnected = Program.SignalRClientService.IsConnected;
+
+                if (!isConnected)
+                {
+                    var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    GuestKeyHooker.Properties.Settings.Default.ServiceIp = txtServerIp.Text;
+                    GuestKeyHooker.Properties.Settings.Default.ServicePort = txtServerPort.Text;
+                    GuestKeyHooker.Properties.Settings.Default.Save();
+                    GuestKeyHooker.Properties.Settings.Default.Reload();
+
+                    this.Close();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                Properties.Settings.Default.ServiceIp = txtServerIp.Text;
-                Properties.Settings.Default.ServicePort = txtServerPort.Text;
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
-
-                this.Close();
+                throw;
             }
         }
     }
