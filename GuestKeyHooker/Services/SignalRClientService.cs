@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +27,29 @@ public class SignalRClientService: IAsyncDisposable
         {
             var formattedMessage = $"{user}: {message}";
             messages.Add(formattedMessage);
+            Debug.WriteLine(formattedMessage);
+            //InvokeAsync(StateHasChanged);
+        });
+         hubConnection.On<string>("ReceiveCommand", (message) => 
+        {
+            var formattedMessage = $"Message: {message}";
+            messages.Add(formattedMessage);
+            Debug.WriteLine(formattedMessage);
             //InvokeAsync(StateHasChanged);
         });
 
         hubConnection.StartAsync();
     }
 
-    public async Task SendCommand(string username, string password)
+    public async Task SendCommand(Keys key)
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.SendAsync("SendCommand", key);
+        }
+    }
+
+    public async Task SendMessage(string username, string password)
     {
         if (hubConnection is not null)
         {

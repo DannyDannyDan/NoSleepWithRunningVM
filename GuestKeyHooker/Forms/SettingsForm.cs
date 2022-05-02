@@ -37,7 +37,8 @@ namespace GuestKeyHooker.Forms
                 //bool isConnected = await Services.GrpcClientService.CanConnectAsync(txtServerIp.Text, txtServerPort.Text);
 
                 //Program.SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
-                Program.SignalRClientService = new SignalRClientService($"https://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
+                //Program.SignalRClientService = new SignalRClientService($"https://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
+                Program.SignalRClientService = new SignalRClientService($"http://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
                 bool isConnected = Program.SignalRClientService.IsConnected;
 
                 if (!isConnected)
