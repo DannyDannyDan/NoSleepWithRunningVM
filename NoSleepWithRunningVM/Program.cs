@@ -36,11 +36,12 @@ internal static class Program
 
         // Add services needed for SignalR
         builder.Services.AddSignalR();
+        
         builder.Services.AddResponseCompression(options => {
             options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                 new[] { "application/octet-stream" });
         });
-
+        
         // Add services to the container.
         //builder.Services.AddGrpc();
 
