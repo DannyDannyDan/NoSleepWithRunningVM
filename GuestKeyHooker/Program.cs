@@ -39,7 +39,7 @@ namespace GuestKeyHooker
             notifyIcon.Icon = Properties.Resources.Keyboard_light;
             notifyIcon.Visible = true;
 
-            
+
 
             // setup keyboard hook
             var kh = new KeyboardHook(true);
@@ -63,14 +63,25 @@ namespace GuestKeyHooker
                     return;
             }
 
-            SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+            //SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+
+            SignalRClientService = new SignalRClientService($"http://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+            //Task.Run(() => {
+            IsConnected = SignalRClientService.IsConnected;
+            //System.Threading.Thread.Sleep(3000);
+            for (int i = 0; i < 10 && !IsConnected; i++)
+            {
+                IsConnected = SignalRClientService.IsConnected;
+                System.Threading.Thread.Sleep(500);
+            }
+            //}).Wait();
 
             IsConnected = SignalRClientService.IsConnected;
 
             //IsConnected = await GrpcClientService.CanConnectAsync();
 
-            if (IsConnected == false)
-                MessageBox.Show("Unable to connect");
+            //if (IsConnected == false)
+            //    MessageBox.Show("Unable to connect");
         }
 
         private static async void Kh_KeyDown(Keys key, bool Shift, bool Ctrl, bool Alt)
@@ -90,7 +101,7 @@ namespace GuestKeyHooker
 
                     Debug.WriteLine($"SendHookedKeyAsync {key} ({(int)key})", "KeyHooker");
 
-                    SignalRClientService.SendCommand("VM Guest", "asdf");
+                    SignalRClientService.SendCommand(key);
 
                     //var reply = await GrpcClientService.Client.SendHookedKeyAsync(new HookedKeySendModel { KeyCode = (int)key });
                 }
