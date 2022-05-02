@@ -39,8 +39,6 @@ namespace GuestKeyHooker
             notifyIcon.Icon = Properties.Resources.Keyboard_light;
             notifyIcon.Visible = true;
 
-
-
             // setup keyboard hook
             var kh = new KeyboardHook(true);
             kh.KeyDown += Kh_KeyDown;
@@ -48,6 +46,9 @@ namespace GuestKeyHooker
             ConnectHostServer();
 
             Application.Run();
+
+            // remove icon from system tray
+            notifyIcon.Visible = false;
         }
 
         private static void ConnectHostServer()
