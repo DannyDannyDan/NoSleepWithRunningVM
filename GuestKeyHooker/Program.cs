@@ -66,13 +66,15 @@ namespace GuestKeyHooker
             //SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
 
             SignalRClientService = new SignalRClientService($"http://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
+
             //Task.Run(() => {
             IsConnected = SignalRClientService.IsConnected;
             //System.Threading.Thread.Sleep(3000);
             for (int i = 0; i < 10 && !IsConnected; i++)
             {
                 IsConnected = SignalRClientService.IsConnected;
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(100);
+                Application.DoEvents();
             }
             //}).Wait();
 
