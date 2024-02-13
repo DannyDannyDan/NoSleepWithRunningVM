@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.VisualBasic.ApplicationServices;
 using NoSleepWithRunningVM.Api;
 
 namespace NoSleepWithRunningVM.Hubs;
@@ -9,6 +11,10 @@ public class CommandHub : Hub
     public Task SendMessage(string user, string message)
     {
         return Clients.All.SendAsync("ReceiveMessage",user, message);
+    }
+    public Task SendPing()
+    {
+        return Clients.All.SendAsync("Pong");
     }
     public Task SendCommand(Keys key)
     {

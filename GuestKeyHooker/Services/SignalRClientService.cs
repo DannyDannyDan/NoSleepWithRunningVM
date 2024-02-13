@@ -5,38 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace GuestKeyHooker.Services;
 public class SignalRClientService: IAsyncDisposable
 {
     private HubConnection? hubConnection;
     private List<string> messages = new();
-    //private string? userInput;
-    //private string? messageInput;
 
     public SignalRClientService(string url)
     {
         hubConnection = new HubConnectionBuilder()
-            //.WithUrl("https://Ryzen1:50443")
             .WithUrl(url)
             .WithAutomaticReconnect()
             .Build();
-
-        // Listen for message from server if we want to
-        hubConnection.On<string, string>("ReceiveMessage", (user, message) => 
-        {
-            var formattedMessage = $"{user}: {message}";
-            messages.Add(formattedMessage);
-            Debug.WriteLine(formattedMessage);
-            //InvokeAsync(StateHasChanged);
-        });
-         hubConnection.On<string>("ReceiveCommand", (message) => 
-        {
-            var formattedMessage = $"Message: {message}";
-            messages.Add(formattedMessage);
-            Debug.WriteLine(formattedMessage);
-            //InvokeAsync(StateHasChanged);
-        });
 
         hubConnection.StartAsync();
     }
@@ -46,14 +28,6 @@ public class SignalRClientService: IAsyncDisposable
         if (hubConnection is not null)
         {
             await hubConnection.SendAsync("SendCommand", key);
-        }
-    }
-
-    public async Task SendMessage(string username, string password)
-    {
-        if (hubConnection is not null)
-        {
-            await hubConnection.SendAsync("SendMessage", username, password);
         }
     }
 
@@ -72,5 +46,4 @@ public class SignalRClientService: IAsyncDisposable
             await hubConnection.DisposeAsync();
         }
     }
-
 }

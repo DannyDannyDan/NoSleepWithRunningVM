@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,28 +34,13 @@ namespace GuestKeyHooker.Forms
 
             try
             {
-                //var gRpcClient = new Services.GrpcClientService(Properties.Settings.Default.ServiceIp);
-                //bool isConnected = await Services.GrpcClientService.CanConnectAsync(txtServerIp.Text, txtServerPort.Text);
-
-                //Program.SignalRClientService = new SignalRClientService($"https://{Properties.Settings.Default.ServiceIp}:{Properties.Settings.Default.ServicePort}/commandhub");
-                //Program.SignalRClientService = new SignalRClientService($"https://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
-                Program.SignalRClientService = new SignalRClientService($"http://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
-                bool isConnected = Program.SignalRClientService.IsConnected;
-
-                //if (!isConnected)
-                //{
-                //    var dlgResult = MessageBox.Show("Unable to connect", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
-                //else
-                //{
                 GuestKeyHooker.Properties.Settings.Default.ServiceIp = txtServerIp.Text;
                 GuestKeyHooker.Properties.Settings.Default.ServicePort = txtServerPort.Text;
                 GuestKeyHooker.Properties.Settings.Default.Save();
                 GuestKeyHooker.Properties.Settings.Default.Reload();
 
+                Program.SignalRClientService = new SignalRClientService($"http://{txtServerIp.Text}:{txtServerPort.Text}/commandhub");
                 this.Close();
-                //}
-
             }
             catch (Exception ex)
             {

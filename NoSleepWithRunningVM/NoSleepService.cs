@@ -11,7 +11,6 @@ namespace NoSleepWithRunningVM
     internal class NoSleepService
     {
         System.Timers.Timer _stayAwakeTimer;
-        private readonly SleepSettingsModel? _sleepSettings;
         public event EventHandler<bool>? PreventingSleep;
         public NoSleepService()
         {
@@ -19,12 +18,10 @@ namespace NoSleepWithRunningVM
             _stayAwakeTimer.Elapsed += _stayAwakeTimer_Elapsed;
         }
 
-
         private void _stayAwakeTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             UpdateSleepMode();
         }
-
 
         internal void PreventSleep()
         {
@@ -37,7 +34,6 @@ namespace NoSleepWithRunningVM
         {
             if (Helpers.SleepSettingsHelper.DoPreventSleep())
             {
-                // TODO: add code here to prevent sleep!
                 Helpers.PreventSleepHelper.PreventSleep();
                 PreventingSleep?.Invoke(this, true);
             }
@@ -46,8 +42,6 @@ namespace NoSleepWithRunningVM
                 Helpers.PreventSleepHelper.AllowSleep();
                 PreventingSleep?.Invoke(this, false);
             }
-
         }
-
     }
 }

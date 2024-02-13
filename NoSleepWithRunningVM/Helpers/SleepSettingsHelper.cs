@@ -47,8 +47,8 @@ namespace NoSleepWithRunningVM.Helpers
                 {
                     VmWareRunning = true,
                     VmWareGuestRunning = true,
-                    GrpcServerEnabled = false,
-                    GrpcServerPort = "50443"
+                    SignalRServerEnabled = false,
+                    SignalRServerPort = "50443"
                 };
                 Properties.Settings.Default.SleepSettings = JsonConvert.SerializeObject(sleepSettings);
                 Properties.Settings.Default.Save();

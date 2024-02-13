@@ -28,142 +28,139 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkGuestVmIsRunning = new System.Windows.Forms.CheckBox();
-            this.chkVmWareIsRunning = new System.Windows.Forms.CheckBox();
-            this.OkButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chkEnableGrpcServer = new System.Windows.Forms.CheckBox();
-            this.txtServerPort = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
+            groupBox1 = new GroupBox();
+            chkGuestVmIsRunning = new CheckBox();
+            chkVmWareIsRunning = new CheckBox();
+            OkButton = new Button();
+            CancelButton = new Button();
+            groupBox2 = new GroupBox();
+            chkEnableSignalRServer = new CheckBox();
+            txtServerPort = new TextBox();
+            label2 = new Label();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.chkGuestVmIsRunning);
-            this.groupBox1.Controls.Add(this.chkVmWareIsRunning);
-            this.groupBox1.Location = new System.Drawing.Point(9, 9);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(434, 92);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Prevent Sleep When:";
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(chkGuestVmIsRunning);
+            groupBox1.Controls.Add(chkVmWareIsRunning);
+            groupBox1.Location = new Point(9, 9);
+            groupBox1.Margin = new Padding(0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(481, 92);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Prevent Sleep When:";
             // 
             // chkGuestVmIsRunning
             // 
-            this.chkGuestVmIsRunning.AutoSize = true;
-            this.chkGuestVmIsRunning.Location = new System.Drawing.Point(33, 59);
-            this.chkGuestVmIsRunning.Name = "chkGuestVmIsRunning";
-            this.chkGuestVmIsRunning.Size = new System.Drawing.Size(174, 25);
-            this.chkGuestVmIsRunning.TabIndex = 1;
-            this.chkGuestVmIsRunning.Text = "and guest is running.";
-            this.chkGuestVmIsRunning.UseVisualStyleBackColor = true;
+            chkGuestVmIsRunning.AutoSize = true;
+            chkGuestVmIsRunning.Location = new Point(33, 59);
+            chkGuestVmIsRunning.Name = "chkGuestVmIsRunning";
+            chkGuestVmIsRunning.Size = new Size(174, 25);
+            chkGuestVmIsRunning.TabIndex = 1;
+            chkGuestVmIsRunning.Text = "and guest is running.";
+            chkGuestVmIsRunning.UseVisualStyleBackColor = true;
             // 
             // chkVmWareIsRunning
             // 
-            this.chkVmWareIsRunning.AutoSize = true;
-            this.chkVmWareIsRunning.Location = new System.Drawing.Point(12, 28);
-            this.chkVmWareIsRunning.Name = "chkVmWareIsRunning";
-            this.chkVmWareIsRunning.Size = new System.Drawing.Size(251, 25);
-            this.chkVmWareIsRunning.TabIndex = 0;
-            this.chkVmWareIsRunning.Text = "VMWare Workstation is running";
-            this.chkVmWareIsRunning.UseVisualStyleBackColor = true;
-            this.chkVmWareIsRunning.CheckedChanged += new System.EventHandler(this.chkVmWareIsRunning_CheckedChanged);
+            chkVmWareIsRunning.AutoSize = true;
+            chkVmWareIsRunning.Location = new Point(12, 28);
+            chkVmWareIsRunning.Name = "chkVmWareIsRunning";
+            chkVmWareIsRunning.Size = new Size(251, 25);
+            chkVmWareIsRunning.TabIndex = 0;
+            chkVmWareIsRunning.Text = "VMWare Workstation is running";
+            chkVmWareIsRunning.UseVisualStyleBackColor = true;
+            chkVmWareIsRunning.CheckedChanged += chkVmWareIsRunning_CheckedChanged;
             // 
             // OkButton
             // 
-            this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OkButton.Location = new System.Drawing.Point(283, 219);
-            this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(77, 30);
-            this.OkButton.TabIndex = 2;
-            this.OkButton.Text = "OK";
-            this.OkButton.UseVisualStyleBackColor = true;
-            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+            OkButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            OkButton.Location = new Point(330, 219);
+            OkButton.Name = "OkButton";
+            OkButton.Size = new Size(77, 30);
+            OkButton.TabIndex = 2;
+            OkButton.Text = "OK";
+            OkButton.UseVisualStyleBackColor = true;
+            OkButton.Click += OkButton_Click;
             // 
             // CancelButton
             // 
-            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(366, 219);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(77, 30);
-            this.CancelButton.TabIndex = 2;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CancelButton.Location = new Point(413, 219);
+            CancelButton.Name = "CancelButton";
+            CancelButton.Size = new Size(77, 30);
+            CancelButton.TabIndex = 2;
+            CancelButton.Text = "Cancel";
+            CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.Click += CancelButton_Click;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.chkEnableGrpcServer);
-            this.groupBox2.Controls.Add(this.txtServerPort);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(9, 106);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(434, 104);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "gRPC Server (Listens for Volume & Media Keys from Guest)";
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(chkEnableSignalRServer);
+            groupBox2.Controls.Add(txtServerPort);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Location = new Point(9, 106);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(481, 104);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "SignalR Server (Listens for Volume & Media Keys from Guest)";
             // 
-            // chkEnableGrpcServer
+            // chkEnableSignalRServer
             // 
-            this.chkEnableGrpcServer.AutoSize = true;
-            this.chkEnableGrpcServer.Location = new System.Drawing.Point(12, 30);
-            this.chkEnableGrpcServer.Name = "chkEnableGrpcServer";
-            this.chkEnableGrpcServer.Size = new System.Drawing.Size(124, 25);
-            this.chkEnableGrpcServer.TabIndex = 5;
-            this.chkEnableGrpcServer.Text = "Enable Server";
-            this.chkEnableGrpcServer.UseVisualStyleBackColor = true;
-            this.chkEnableGrpcServer.CheckedChanged += new System.EventHandler(this.chkEnableGrpcServer_CheckedChanged);
+            chkEnableSignalRServer.AutoSize = true;
+            chkEnableSignalRServer.Location = new Point(12, 30);
+            chkEnableSignalRServer.Name = "chkEnableSignalRServer";
+            chkEnableSignalRServer.Size = new Size(124, 25);
+            chkEnableSignalRServer.TabIndex = 5;
+            chkEnableSignalRServer.Text = "Enable Server";
+            chkEnableSignalRServer.UseVisualStyleBackColor = true;
+            chkEnableSignalRServer.CheckedChanged += chkEnableSignalRServer_CheckedChanged;
             // 
             // txtServerPort
             // 
-            this.txtServerPort.Enabled = false;
-            this.txtServerPort.Location = new System.Drawing.Point(79, 61);
-            this.txtServerPort.Name = "txtServerPort";
-            this.txtServerPort.Size = new System.Drawing.Size(69, 29);
-            this.txtServerPort.TabIndex = 4;
+            txtServerPort.Enabled = false;
+            txtServerPort.Location = new Point(79, 61);
+            txtServerPort.Name = "txtServerPort";
+            txtServerPort.Size = new Size(69, 29);
+            txtServerPort.TabIndex = 4;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 21);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Port:";
+            label2.AutoSize = true;
+            label2.Location = new Point(32, 64);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 21);
+            label2.TabIndex = 3;
+            label2.Text = "Port:";
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 261);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.OkButton);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.CancelButton);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(465, 300);
-            this.Name = "SettingsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "No-Sleep Settings";
-            this.Load += new System.EventHandler(this.SettingsForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(496, 261);
+            Controls.Add(groupBox2);
+            Controls.Add(OkButton);
+            Controls.Add(groupBox1);
+            Controls.Add(CancelButton);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4);
+            MaximizeBox = false;
+            MinimumSize = new Size(465, 300);
+            Name = "SettingsForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "No-Sleep Settings";
+            Load += SettingsForm_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -174,7 +171,7 @@
         private Button OkButton;
         private Button CancelButton;
         private GroupBox groupBox2;
-        private CheckBox chkEnableGrpcServer;
+        private CheckBox chkEnableSignalRServer;
         private TextBox txtServerPort;
         private Label label2;
     }

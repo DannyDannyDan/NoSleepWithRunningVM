@@ -20,8 +20,8 @@ namespace NoSleepWithRunningVM.Forms
             var sleepSettings = JsonConvert.DeserializeObject<Models.SleepSettingsModel>(Properties.Settings.Default.SleepSettings);
             chkVmWareIsRunning.Checked = sleepSettings.VmWareRunning;
             chkGuestVmIsRunning.Checked = sleepSettings.VmWareGuestRunning;
-            chkEnableGrpcServer.Checked = sleepSettings.GrpcServerEnabled;
-            txtServerPort.Text = sleepSettings.GrpcServerPort;
+            chkEnableSignalRServer.Checked = sleepSettings.SignalRServerEnabled;
+            txtServerPort.Text = sleepSettings.SignalRServerPort;
 
         }
 
@@ -36,8 +36,8 @@ namespace NoSleepWithRunningVM.Forms
             {
                 VmWareRunning = chkVmWareIsRunning.Checked,
                 VmWareGuestRunning = chkGuestVmIsRunning.Checked,
-                GrpcServerEnabled = chkEnableGrpcServer.Checked,
-                GrpcServerPort = txtServerPort.Text
+                SignalRServerEnabled = chkEnableSignalRServer.Checked,
+                SignalRServerPort = txtServerPort.Text
             });
             this.Close();
         }
@@ -51,9 +51,9 @@ namespace NoSleepWithRunningVM.Forms
             chkGuestVmIsRunning.Enabled = chkVmWareIsRunning.Checked;
         }
 
-        private void chkEnableGrpcServer_CheckedChanged(object sender, EventArgs e)
+        private void chkEnableSignalRServer_CheckedChanged(object sender, EventArgs e)
         {
-            txtServerPort.Enabled = chkEnableGrpcServer.Checked;
+            txtServerPort.Enabled = chkEnableSignalRServer.Checked;
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)

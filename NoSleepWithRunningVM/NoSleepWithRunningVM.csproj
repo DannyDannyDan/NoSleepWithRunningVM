@@ -11,6 +11,22 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Forms\DummySendKeysForm.cs" />
     <Compile Remove="Forms\DummySendKeysForm.Designer.cs" />
@@ -24,7 +40,6 @@
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
-    <None Remove="Protos\hookedKey.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,10 +58,6 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.45.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Protobuf Include="Protos\hookedKey.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
