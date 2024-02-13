@@ -7,3 +7,7 @@ Add "Microsoft Visual Studio Installer Projects" extension to Visual Studio so y
 Build "SetupNoSleep" project, then right-click the project and click install (or, if host will be a different computer, copy the setup.exe or SetupNoSleep.msi file to the intendend host and install).
 
 Build "SetupGuestKeyHooker", then browse to the compiled Setup.exe or SetupGuestKeyHooker.msi file and copy/install it on client.
+
+Start No Sleep with Running VM on host, right-click icon on taskbar and open settings.  Select options you want enabled, if using SignalR to monitor for volume keys you may need to restart app after saving changes.
+
+Start Guest Key Hooker on client, right-click icon on taskbar, set the ip/port to include IP of host machine that you can ping from client and the port specified for SignalR on the host.
